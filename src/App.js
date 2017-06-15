@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 class App extends Component {
   onClick() {
-    console.log('it works...')
+    axios
+      .post('/users', {
+        id: 12345
+      })
+      .then(function(response) {
+        console.log(response)
+      })
+      .catch(function(error) {
+        console.log(error)
+      })
   }
   render() {
     return (

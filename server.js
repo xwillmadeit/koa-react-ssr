@@ -3,6 +3,7 @@ import serve from 'koa-static'
 import Router from 'koa-router'
 import views from 'koa-views'
 import convert from 'koa-convert'
+import bodyParser from 'koa-bodyparser'
 import { resolve } from 'path'
 import webpack from 'webpack'
 import devMiddleware from 'koa-webpack-dev-middleware'
@@ -21,6 +22,11 @@ router.get('/', (ctx, next) => {
   })
 })
 
+router.post('/users', (ctx, next) => {
+  ctx.body = ctx.request.body
+})
+
+app.use(bodyParser())
 app.use(convert(devMiddleware(compiler)))
 app.use(views(resolve(__dirname, 'views'), { map: { html: 'ejs' } }))
 app.use(serve(resolve(__dirname, 'views')))
